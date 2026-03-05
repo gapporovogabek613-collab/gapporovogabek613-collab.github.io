@@ -102,3 +102,29 @@ document.getElementById("game").innerHTML=
 
 </body>
 </html>
+<script>
+function openGame(game){
+  if(game === "snake"){
+    alert("Snake o'yini tez orada qo'shiladi 🐍");
+  }
+  if(game === "click"){
+    let score = 0;
+    while(confirm("Click Game! OK bosganingizda +1 ochko")){
+      score++;
+      alert("Sizning ochko: " + score);
+    }
+  }
+  if(game === "guess"){
+    let number = Math.floor(Math.random()*10)+1;
+    let guess = prompt("1 dan 10 gacha son toping");
+    if(guess == number){
+      alert("To'g'ri topdingiz! 🎉");
+    } else {
+      alert("Xato! To'g'ri javob: " + number);
+    }
+  }
+}
+</script>
+<button onclick="openGame('snake')">Snake</button>
+<button onclick="openGame('click')">Click Game</button>
+<button onclick="openGame('guess')">Guess Number</button>
