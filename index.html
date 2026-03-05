@@ -1,45 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Snake Game</title>
+<meta charset="UTF-8">
+<title>UzBrainHub Games</title>
+
 <style>
 body{
 background:black;
 color:white;
+font-family:Arial;
 text-align:center;
 }
-canvas{
-background:#111;
+
+button{
+padding:15px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#00ffcc;
+}
+
+#game{
+margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🐍 Snake Game</h1>
-<canvas id="game" width="400" height="400"></canvas>
+<h1>🎮 UzBrainHub Mini Games</h1>
+
+<button onclick="snake()">Snake</button>
+<button onclick="clickGame()">Click Game</button>
+<button onclick="guess()">Guess Number</button>
+<button onclick="reaction()">Reaction Test</button>
+<button onclick="dice()">Dice Roll</button>
+<button onclick="coin()">Coin Flip</button>
+<button onclick="color()">Color Change</button>
+<button onclick="counter()">Tap Counter</button>
+<button onclick="random()">Random Number</button>
+<button onclick="joke()">Random Joke</button>
+
+<div id="game"></div>
 
 <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
 
-let snake = [{x:200,y:200}];
-let food = {x:100,y:100};
-let dx = 20;
-let dy = 0;
-
-document.addEventListener("keydown",changeDirection);
-
-function changeDirection(event){
-if(event.key==="ArrowUp"){dx=0;dy=-20;}
-if(event.key==="ArrowDown"){dx=0;dy=20;}
-if(event.key==="ArrowLeft"){dx=-20;dy=0;}
-if(event.key==="ArrowRight"){dx=20;dy=0;}
+function snake(){
+document.getElementById("game").innerHTML =
+"🐍 Snake o'yini tez orada qo‘shiladi!";
 }
 
-function draw(){
-ctx.clearRect(0,0,400,400);
+function clickGame(){
+let score=0
+document.getElementById("game").innerHTML=
+"<button onclick='this.innerText=++score'>CLICK!</button>"
+}
 
-snake.forEach(part=>{
-ctx.fillStyle="lime";
-ctx
+function guess(){
+let n=Math.floor(Math.random()*10)+1
+let g=prompt("1 dan 10 gacha son toping")
+if(g==n) alert("To‘g‘ri!")
+else alert("Xato! Son "+n)
+}
+
+function reaction(){
+let t=Date.now()
+alert("OK bosganingizdan keyin tez bosing!")
+let r=Date.now()-t
+alert("Sizning reaktsiya: "+r+" ms")
+}
+
+function dice(){
+let d=Math.floor(Math.random()*6)+1
+document.getElementById("game").innerHTML="🎲 "+d
+}
+
+function coin(){
+let c=Math.random()>0.5?"Head":"Tail"
+document.getElementById("game").innerHTML="🪙 "+c
+}
+
+function color(){
+document.body.style.background=
+"#"+Math.floor(Math.random()*16777215).toString(16)
+}
+
+let count=0
+function counter(){
+count++
+document.getElementById("game").innerHTML="Tap: "+count
+}
+
+function random(){
+document.getElementById("game").innerHTML=
+Math.floor(Math.random()*100)
+}
+
+function joke(){
+document.getElementById("game").innerHTML=
+"😂 Dasturchi choy ichib bug tuzatadi!"
+}
+
+</script>
+
+</body>
+</html>
