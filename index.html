@@ -1,103 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>UzBrainHub Mini Games</title>
+<meta charset="UTF-8">
+<title>Mini Games</title>
 <style>
 body{
 background:black;
 color:white;
+font-family:Arial;
 text-align:center;
-font-family:sans-serif;
 }
 button{
-background:#00e6c3;
-border:none;
-padding:12px;
-margin:5px;
-border-radius:8px;
+padding:15px;
+margin:10px;
+font-size:18px;
+border-radius:10px;
+}
+canvas{
+background:#111;
+margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎮 UzBrainHub Mini Games</h1>
+<h1>🎮 Mini Games</h1>
 
-<button onclick="snake()">Snake</button>
-<button onclick="clickGame()">Click Game</button>
-<button onclick="guess()">Guess Number</button>
-<button onclick="reaction()">Reaction Test</button>
-<button onclick="dice()">Dice Roll</button>
-<button onclick="coin()">Coin Flip</button>
-<button onclick="color()">Color Change</button>
-<button onclick="tap()">Tap Counter</button>
-<button onclick="random()">Random Number</button>
-<button onclick="joke()">Random Joke</button>
+<button onclick="startSnake()">🐍 Snake</button>
+<button onclick="guessGame()">🔢 Guess Number</button>
+<button onclick="clickGame()">⭐ Click Game</button>
+
+<canvas id="game" width="300" height="300"></canvas>
 
 <script>
 
-function snake(){
-alert("🐍 Snake o'yini tez orada qo'shiladi");
+let canvas=document.getElementById("game");
+let ctx=canvas.getContext("2d");
+
+let snake=[];
+let food={x:150,y:150};
+let dx=10;
+let dy=0;
+
+function startSnake(){
+snake=[{x:100,y:100}];
+setInterval(drawSnake,100);
 }
+
+function drawSnake(){
+ctx.clearRect(0,0,300,300);
+
+let head={x:snake[0].x+dx,y:snake[0].y+dy};
+snake.unshift(head);
+
+if(head.x==food.x && head.y==food.y){
+food.x=Math.floor(Math.random()*30)*10;
+food.y=Math.floor(Math.random()*30)*10;
+}else{
+snake.pop();
+}
+
+ctx.fillStyle="red";
+ctx.fillRect(food.x,food.y,10,10);
+
+ctx.fillStyle="lime";
+snake.forEach(p=>{
+ctx.fillRect(p.x,p.y,10,10);
+});
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key=="ArrowUp"){dx=0;dy=-10;}
+if(e.key=="ArrowDown"){dx=0;dy=10;}
+if(e.key=="ArrowLeft"){dx=-10;dy=0;}
+if(e.key=="ArrowRight"){dx=10;dy=0;}
+});
+
+function guessGame(){
+let n=Math.floor(Math.random()*10);
+let g=prompt("0 dan 9 gacha son toping");
+if(g==n){alert("To'g'ri!");}
+else{alert("Xato. Son "+n);}
+}
+
+let score=0;
 
 function clickGame(){
-let score=0;
-while(confirm("OK bossangiz +1 ochko")){
 score++;
-alert("Score: "+score);
-}
-}
-
-function guess(){
-let n=Math.floor(Math.random()*10)+1;
-let g=prompt("1 dan 10 gacha son toping");
-if(g==n){
-alert("🎉 To'g'ri topdingiz");
-}else{
-alert("❌ Xato. Javob: "+n);
-}
+alert("⭐ Yulduz: "+score);
 }
 
-function reaction(){
-let start=Date.now();
-alert("OK bosib tezlikni tekshiring");
-let time=Date.now()-start;
-alert("Sizning reaksiya: "+time+" ms");
-}
+</script>
 
-function dice(){
-let n=Math.floor(Math.random()*6)+1;
-alert("🎲 Dice: "+n);
-}
-
-function coin(){
-let r=Math.random();
-if(r<0.5){
-alert("🪙 Head");
-}else{
-alert("🪙 Tail");
-}
-}
-
-function color(){
-document.body.style.background=
-"#"+Math.floor(Math.random()*16777215).toString(16);
-}
-
-let t=0;
-function tap(){
-t++;
-alert("Tap: "+t);
-}
-
-function random(){
-let n=Math.floor(Math.random()*100);
-alert("Random number: "+n);
-}
-
-function joke(){
-let jokes=[
-"😂 Dasturchi choy ichadi, bug tuzatadi!",
-"😂 Kompyuter uxlamaydi, lekin dasturchi uxlaydi",
-"😂 1 bug ketadi, 2 bug keladi"
-];
+</body>
+</html>
