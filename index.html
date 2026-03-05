@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mini Game</title>
+<title>Snake Game</title>
 <style>
 body{
 background:black;
 color:white;
 text-align:center;
-font-family:Arial;
 }
-button{
-padding:20px;
-font-size:20px;
+canvas{
+background:#111;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎮 Tugmani bos o‘yini</h1>
-<p>Ball: <span id="score">0</span></p>
-
-<button onclick="addScore()">BOS!</button>
+<h1>🐍 Snake Game</h1>
+<canvas id="game" width="400" height="400"></canvas>
 
 <script>
-let score = 0;
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-function addScore(){
-score++;
-document.getElementById("score").innerText = score;
+let snake = [{x:200,y:200}];
+let food = {x:100,y:100};
+let dx = 20;
+let dy = 0;
+
+document.addEventListener("keydown",changeDirection);
+
+function changeDirection(event){
+if(event.key==="ArrowUp"){dx=0;dy=-20;}
+if(event.key==="ArrowDown"){dx=0;dy=20;}
+if(event.key==="ArrowLeft"){dx=-20;dy=0;}
+if(event.key==="ArrowRight"){dx=20;dy=0;}
 }
-</script>
 
-</body>
-</html>
+function draw(){
+ctx.clearRect(0,0,400,400);
+
+snake.forEach(part=>{
+ctx.fillStyle="lime";
+ctx
