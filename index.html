@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Mini Game</title>
 <style>
 body{
 background:black;
 color:white;
 text-align:center;
+font-family:Arial;
+}
+button{
+padding:20px;
+font-size:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Og'abekning sayti</h1>
-<p>Bu mening birinchi GitHub saytim</p>
+<h1>🎮 Tugmani bos o‘yini</h1>
+<p>Ball: <span id="score">0</span></p>
+
+<button onclick="addScore()">BOS!</button>
+
+<script>
+let score = 0;
+
+function addScore(){
+score++;
+document.getElementById("score").innerText = score;
+}
+</script>
 
 </body>
 </html>
