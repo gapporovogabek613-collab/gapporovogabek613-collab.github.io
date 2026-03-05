@@ -1,130 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ogabek Game Hub</title>
+<title>UzBrainHub Mini Games</title>
 <style>
 body{
 background:black;
 color:white;
 text-align:center;
-font-family:Arial;
+font-family:sans-serif;
 }
 button{
-padding:15px;
+background:#00e6c3;
+border:none;
+padding:12px;
 margin:5px;
-font-size:16px;
-}
-#game{
-margin-top:20px;
+border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎮 Ogabek Game Hub</h1>
+<h1>🎮 UzBrainHub Mini Games</h1>
 
 <button onclick="snake()">Snake</button>
-<button onclick="clickGame()">Click</button>
-<button onclick="guess()">Guess</button>
-<button onclick="reaction()">Reaction</button>
-<button onclick="catchBox()">Catch</button>
-<button onclick="mathGame()">Math</button>
-<button onclick="coin()">Coin</button>
-<button onclick="dice()">Dice</button>
-<button onclick="quiz()">Quiz</button>
-<button onclick="race()">Race</button>
-
-<div id="game"></div>
+<button onclick="clickGame()">Click Game</button>
+<button onclick="guess()">Guess Number</button>
+<button onclick="reaction()">Reaction Test</button>
+<button onclick="dice()">Dice Roll</button>
+<button onclick="coin()">Coin Flip</button>
+<button onclick="color()">Color Change</button>
+<button onclick="tap()">Tap Counter</button>
+<button onclick="random()">Random Number</button>
+<button onclick="joke()">Random Joke</button>
 
 <script>
 
 function snake(){
-alert("🐍 Snake o‘yini keyinroq qo‘shiladi")
+alert("🐍 Snake o'yini tez orada qo'shiladi");
 }
 
 function clickGame(){
-let score=0
-document.getElementById("game").innerHTML=
-"<button onclick='this.innerText=++score'>Click me</button>"
+let score=0;
+while(confirm("OK bossangiz +1 ochko")){
+score++;
+alert("Score: "+score);
+}
 }
 
 function guess(){
-let n=Math.floor(Math.random()*10)+1
-let g=prompt("1 dan 10 gacha son toping")
-if(g==n) alert("🎉 To‘g‘ri topdingiz!")
-else alert("❌ Xato. Son "+n)
+let n=Math.floor(Math.random()*10)+1;
+let g=prompt("1 dan 10 gacha son toping");
+if(g==n){
+alert("🎉 To'g'ri topdingiz");
+}else{
+alert("❌ Xato. Javob: "+n);
+}
 }
 
 function reaction(){
-alert("3 sekunddan keyin OK ni bosing!")
-setTimeout(()=>alert("Bos!"),3000)
-}
-
-function catchBox(){
-document.getElementById("game").innerHTML=
-"<button onclick='this.remove()'>Catch me!</button>"
-}
-
-function mathGame(){
-let a=Math.floor(Math.random()*10)
-let b=Math.floor(Math.random()*10)
-let c=prompt(a+" + "+b+" = ?")
-if(c==a+b) alert("To‘g‘ri")
-else alert("Xato")
-}
-
-function coin(){
-let r=Math.random()<0.5?"Heads":"Tails"
-alert("Coin: "+r)
+let start=Date.now();
+alert("OK bosib tezlikni tekshiring");
+let time=Date.now()-start;
+alert("Sizning reaksiya: "+time+" ms");
 }
 
 function dice(){
-let r=Math.floor(Math.random()*6)+1
-alert("🎲 Dice: "+r)
+let n=Math.floor(Math.random()*6)+1;
+alert("🎲 Dice: "+n);
 }
 
-function quiz(){
-let q=prompt("O‘zbekiston poytaxti?")
-if(q.toLowerCase()=="toshkent")
-alert("To‘g‘ri!")
-else
-alert("Xato")
+function coin(){
+let r=Math.random();
+if(r<0.5){
+alert("🪙 Head");
+}else{
+alert("🪙 Tail");
+}
 }
 
-function race(){
-let score=0
-document.getElementById("game").innerHTML=
-"<button onclick='this.innerText=\"🚗 Speed \"+(++score)'>Drive</button>"
+function color(){
+document.body.style.background=
+"#"+Math.floor(Math.random()*16777215).toString(16);
+}
+
+let t=0;
+function tap(){
+t++;
+alert("Tap: "+t);
+}
+
+function random(){
+let n=Math.floor(Math.random()*100);
+alert("Random number: "+n);
+}
+
+function joke(){
+let jokes=[
+"😂 Dasturchi choy ichadi, bug tuzatadi!",
+"😂 Kompyuter uxlamaydi, lekin dasturchi uxlaydi",
+"😂 1 bug ketadi, 2 bug keladi"
+];
+let j=jokes[Math.floor(Math.random()*jokes.length)];
+alert(j);
 }
 
 </script>
 
 </body>
 </html>
-<script>
-function openGame(game){
-  if(game === "snake"){
-    alert("Snake o'yini tez orada qo'shiladi 🐍");
-  }
-  if(game === "click"){
-    let score = 0;
-    while(confirm("Click Game! OK bosganingizda +1 ochko")){
-      score++;
-      alert("Sizning ochko: " + score);
-    }
-  }
-  if(game === "guess"){
-    let number = Math.floor(Math.random()*10)+1;
-    let guess = prompt("1 dan 10 gacha son toping");
-    if(guess == number){
-      alert("To'g'ri topdingiz! 🎉");
-    } else {
-      alert("Xato! To'g'ri javob: " + number);
-    }
-  }
-}
-</script>
-<button onclick="openGame('snake')">Snake</button>
-<button onclick="openGame('click')">Click Game</button>
-<button onclick="openGame('guess')">Guess Number</button>
